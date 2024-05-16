@@ -1,0 +1,22 @@
+# views/levels/level1.kv
+<Level1>:
+    targets_layout: targets_layout
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        GridLayout:
+            id: targets_layout
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+
+<Target>:
+    size_hint: None, None
+    size: 30, 30
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size

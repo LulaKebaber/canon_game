@@ -1,0 +1,26 @@
+# game_screen.kv
+
+<GameScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        size_hint: (None, None)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        Button:
+            text: 'New Game'
+            size_hint: (None, None)
+            size: (200, 50)
+            on_release: root.start_new_game()
+
+        Button:
+            text: 'Load'
+            size_hint: (None, None)
+            size: (200, 50)
+            on_release: app.root.controller.load_game()
+
+        Button:
+            text: 'Select Level'
+            size_hint: (None, None)
+            size: (200, 50)
+            on_release: app.root.controller.select_level()

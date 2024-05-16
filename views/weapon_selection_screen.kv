@@ -1,0 +1,46 @@
+<Button>:
+    font_size: 20
+
+<WeaponSelectionScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Select Weapon Quantities'
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Bullets:'
+            Slider:
+                id: bullets_slider
+                min: 0
+                max: 100
+                value: 0
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Bombshells:'
+            Slider:
+                id: bombshells_slider
+                min: 0
+                max: 100
+                value: 0
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Lasers:'
+            Slider:
+                id: lasers_slider
+                min: 0
+                max: 100
+                value: 0
+
+        Button:
+            text: 'Start Game'
+            on_release: root.controller.start_game('level1', bullets_slider.value, bombshells_slider.value, lasers_slider.value)
