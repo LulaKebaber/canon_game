@@ -34,7 +34,6 @@ class GameApp(App):
         # добавление первого уровня
         level1 = Level1(name='level1')
         level1.controller = game_controller
-        level1.create_targets()
         screen_manager.add_widget(level1)
 
         # Устанавливаем главный экран как текущий

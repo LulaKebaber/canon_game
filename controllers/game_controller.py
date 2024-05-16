@@ -7,7 +7,6 @@ class GameController:
         self.lasers = 0
 
     def start_game(self, level, bullets, bombshells, lasers):
-        # Здесь можно добавить код для начала игры, например, переключение на указанный уровень
         self.screen_manager.current = level
         self.bullets = bullets
         self.bombshells = bombshells
