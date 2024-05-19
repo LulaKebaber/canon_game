@@ -15,9 +15,10 @@ class Laser(Widget):
     is_launched = False
     initial_pos = (300, 300)
 
-    def __init__(self, **kwargs):
+    def __init__(self, controller=None, **kwargs):
         super(Laser, self).__init__(**kwargs)
         self.size_hint = (None, None)
+        self.controller = controller
         self.size = (20, 20)
         self.pos = self.initial_pos
         self.path_points = []
@@ -59,6 +60,8 @@ class Laser(Widget):
     def on_touch_up(self, touch):
         if self.is_dragging:
             self.is_dragging = False
+            self.controller.weapon_quantities['lasers'] -= 1
+            self.parent.update_bullets_label()
             self.launch()
 
     def launch(self):

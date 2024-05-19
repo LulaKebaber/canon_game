@@ -16,10 +16,12 @@ class Bullet(Widget):
     is_launched = False
     acceleration = 0
 
-    def __init__(self, **kwargs):
+    def __init__(self, controller=None, **kwargs):
         super(Bullet, self).__init__(**kwargs)
         self.size_hint = (None, None)
         self.size = (50, 50)
+        self.controller = controller
+
         with self.canvas:
             Color(1, 1, 1)
             self.ellipse = Ellipse(pos=self.pos, size=self.size)
@@ -51,7 +53,9 @@ class Bullet(Widget):
     def on_touch_up(self, touch):
         if self.is_dragging:
             self.is_dragging = False
+            self.controller.weapon_quantities['bullets'] -= 1
             self.move_ball()
+            self.parent.update_bullets_label()
 
     def move_ball(self):
         direction = Vector(*self.end_pos) - Vector(*self.start_pos)

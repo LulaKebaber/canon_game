@@ -13,13 +13,13 @@ Builder.load_file('views/levels/level1.kv')
 class Level1(Screen):
     parser = LevelParser("level1")
 
-    def __init__(self, **kw):
+    def __init__(self, controller=None, **kw):
         super().__init__(**kw)
         self.ball = None
         self.laser = None
         self.data = None
         self.weapon_quantities = None
-        self.controller = None
+        self.controller = controller
 
     def on_enter(self):
         self.data = self.parser.parse_json()
@@ -53,8 +53,8 @@ class Level1(Screen):
         bombshells_label.text = f"Bombshells: {int(self.weapon_quantities['bombshells'])}"
 
     def create_ball(self):
-        self.ball = Bullet()
-        self.laser = Laser()
+        self.ball = Bullet(self.controller)
+        self.laser = Laser(self.controller)
         self.add_widget(self.ball)
         self.add_widget(self.laser)
 
