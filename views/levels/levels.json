@@ -8,5 +8,11 @@
     "level1": {
       "positions": [[900, 900], [800, 400], [1200, 200]]
     }
+  },
+  "obstacles": {
+    "default_obstacle": {
+      "color": [0.5, 0.5, 0.5, 1],
+      "size": [50, 50]
+    }
   }
 }

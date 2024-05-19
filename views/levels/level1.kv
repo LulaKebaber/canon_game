@@ -4,3 +4,28 @@
     FloatLayout:
         id: target_layout
         size_hint: 1, 1
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: (None, None)
+            size: 200, 50
+            pos: 10, 10
+
+            Label:
+                id: bullets_label
+                text: 'Bullets: 0'
+                size_hint: (None, None)
+                size: self.texture_size
+
+            Label:
+                id: lasers_label
+                text: 'Lasers: 0'
+                size_hint: (None, None)
+                size: self.texture_size
+
+            Label:
+                id: bombshells_label
+                text: 'Bombshells: 0'
+                size_hint: (None, None)
+                size: self.texture_size
+
