@@ -1,0 +1,12 @@
+{
+  "targets": {
+    "name": "default_target",
+    "color": [1, 1, 1, 1],
+    "size": [70, 70]
+  },
+  "levels": {
+    "level1": {
+      "positions": [[900, 900], [800, 400], [1200, 200]]
+    }
+  }
+}

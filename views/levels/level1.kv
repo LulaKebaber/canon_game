@@ -1,12 +1,6 @@
-# views/levels/level1.kv
 <Level1>:
-    grid_layout: grid_layout
+    target_layout: target_layout
 
-    BoxLayout:
-        orientation: 'vertical'
-
-        GridLayout:
-            id: grid_layout
-            cols: 1
-            size_hint_y: None
-            height: self.minimum_height
+    FloatLayout:
+        id: target_layout
+        size_hint: 1, 1

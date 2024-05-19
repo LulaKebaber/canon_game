@@ -34,11 +34,10 @@ class PongBall(Widget):
         self.velocity_y -= self.acceleration
         self.pos = Vector(*self.velocity) + self.pos
 
-        if self.y > 1400 or self.y < 0 or self.x > 2000 or self.x < 0:
-            self.pos = (100, 100)
-            self.velocity = Vector(0, 0)
-            self.acceleration = 0
-            self.is_launched = False
+        if self.y > 1400 or self.y < 0 or self.x > 1900 or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
+            self.reset_ball()
+        if self.parent:
+            self.parent.on_collision()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
@@ -60,10 +59,9 @@ class PongBall(Widget):
         self.is_launched = True
         self.acceleration = 0.2
 
+    def reset_ball(self):
+        self.pos = (200, 200)
+        self.velocity = Vector(0, 0)
+        self.acceleration = 0
+        self.is_launched = False
 
-class Laser(Widget):
-    pass
-
-
-class BombShell(Widget):
-    pass

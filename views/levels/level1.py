@@ -3,29 +3,47 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
-from .pongball import PongBall
 from kivy.graphics import Color, Rectangle
+from .pongball import PongBall
+from .level_parser import LevelParser
 
 Builder.load_file('views/levels/level1.kv')
 
 
 class Level1(Screen):
     grid_layout = ObjectProperty(None)
+    parser = LevelParser("level1")
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.ball = None
+        self.data = None
 
     def on_enter(self):
+        self.data = self.parser.parse_json()
         self.create_targets()
+        self.create_ball()
 
     def create_targets(self):
-        positions = [(100, 100), (200, 200), (300, 300)]
+        level = self.parser.parse_level()
+        targets = self.parser.parse_targets()
 
-        for pos in positions:
-            target = Widget(size_hint=(None, None), size=(30, 30))
+        for pos in level["positions"]:
+            target = Widget(size_hint=(None, None), size=targets["size"])
             target.pos = pos
+            print(target.pos)
             with target.canvas.before:
-                Color(0, 1, 0, 1)
+                Color(targets["color"])
                 Rectangle(pos=target.pos, size=target.size)
-            self.grid_layout.add_widget(target)
+            self.target_layout.add_widget(target)
 
-        ball = PongBall()
-        ball.pos = (150, 150)
-        self.add_widget(ball)
+    def create_ball(self):
+        self.ball = PongBall()
+        self.add_widget(self.ball)
+
+    def on_collision(self):
+        for target in self.target_layout.children[:]:
+            if self.ball.collide_widget(target):
+                self.target_layout.remove_widget(target)
+                self.ball.reset_ball()
+                break
