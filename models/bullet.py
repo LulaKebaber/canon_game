@@ -1,4 +1,4 @@
-# pongball.py
+# bullet.py
 from kivy.uix.widget import Widget
 from kivy.vector import Vector
 from kivy.clock import Clock
@@ -6,7 +6,7 @@ from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.graphics import Ellipse, Color
 
 
-class PongBall(Widget):
+class Bullet(Widget):
     velocity_x = NumericProperty(0)
     velocity_y = NumericProperty(0)
     velocity = ReferenceListProperty(velocity_x, velocity_y)
@@ -17,7 +17,7 @@ class PongBall(Widget):
     acceleration = 0
 
     def __init__(self, **kwargs):
-        super(PongBall, self).__init__(**kwargs)
+        super(Bullet, self).__init__(**kwargs)
         self.size_hint = (None, None)
         self.size = (50, 50)
         with self.canvas:

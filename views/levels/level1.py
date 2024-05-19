@@ -1,17 +1,15 @@
 # views/levels/level1.py
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ObjectProperty
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.graphics import Color, Rectangle
-from .pongball import PongBall
+from models.bullet import Bullet
 from .level_parser import LevelParser
 
 Builder.load_file('views/levels/level1.kv')
 
 
 class Level1(Screen):
-    grid_layout = ObjectProperty(None)
     parser = LevelParser("level1")
 
     def __init__(self, **kw):
@@ -38,7 +36,7 @@ class Level1(Screen):
             self.target_layout.add_widget(target)
 
     def create_ball(self):
-        self.ball = PongBall()
+        self.ball = Bullet()
         self.add_widget(self.ball)
 
     def on_collision(self):
