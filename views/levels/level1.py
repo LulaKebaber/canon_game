@@ -5,6 +5,7 @@ from kivy.lang import Builder
 from kivy.graphics import Color, Rectangle
 from models.bullet import Bullet
 from models.laser import Laser
+from models.bombshell import BombShell
 from .level_parser import LevelParser
 
 Builder.load_file('views/levels/level1.kv')
@@ -17,13 +18,13 @@ class Level1(Screen):
         super().__init__(**kw)
         self.ball = None
         self.laser = None
+        self.bombshell = None
         self.data = None
         self.weapon_quantities = None
         self.controller = controller
 
     def on_enter(self):
         self.data = self.parser.parse_json()
-        self.controller = self.manager.get_screen('main_menu').controller
         self.weapon_quantities = self.controller.get_weapon_quantities()
         self.create_targets()
         self.create_ball()
@@ -36,7 +37,6 @@ class Level1(Screen):
         for pos in level["positions"]:
             target = Widget(size_hint=(None, None), size=targets["size"])
             target.pos = pos
-            print(target.pos)
             with target.canvas.before:
                 Color(targets["color"])
                 Rectangle(pos=target.pos, size=target.size)
@@ -55,8 +55,10 @@ class Level1(Screen):
     def create_ball(self):
         self.ball = Bullet(self.controller)
         self.laser = Laser(self.controller)
+        self.bombshell = BombShell(self.controller)
         self.add_widget(self.ball)
         self.add_widget(self.laser)
+        self.add_widget(self.bombshell)
 
     def on_collision(self):
         for target in self.target_layout.children[:]:
@@ -68,4 +70,9 @@ class Level1(Screen):
             if self.laser.collide_widget(target):
                 self.target_layout.remove_widget(target)
                 self.laser.reset_laser()
+                break
+
+            if self.bombshell.collide_widget(target):
+                self.bombshell.animate_explosion()
+                self.target_layout.remove_widget(target)
                 break
