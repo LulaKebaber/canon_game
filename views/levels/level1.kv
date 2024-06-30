@@ -1,31 +1,59 @@
 <Level1>:
     target_layout: target_layout
 
-    FloatLayout:
-        id: target_layout
-        size_hint: 1, 1
+    
+    BoxLayout:
+        id: main_layout
+        orientation: 'vertical'
 
         BoxLayout:
-            orientation: 'horizontal'
-            size_hint: (None, None)
-            size: 200, 50
-            pos: 10, 10
+            size_hint_y: None
+            height: '50dp'
+            padding: '10dp'
+            spacing: '10dp'
+            pos_hint: {'top': 1}
+
+            Button:
+                text: '1'
+                on_press: root.on_button_1_press()
+                size_hint: None, None
+                size: '40dp', '40dp'
+
+            Button:
+                text: '2'
+                on_press: root.on_button_2_press()
+                size_hint: None, None
+                size: '40dp', '40dp'
+
+            Button:
+                text: '3'
+                on_press: root.on_button_3_press()
+                size_hint: None, None
+                size: '40dp', '40dp'
+
+        RelativeLayout:
+            id: target_layout
+
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            padding: '10dp'
+            spacing: '10dp'
 
             Label:
                 id: bullets_label
                 text: 'Bullets: 0'
-                size_hint: (None, None)
-                size: self.texture_size
+                size_hint_x: None
+                width: '100dp'
 
             Label:
                 id: lasers_label
                 text: 'Lasers: 0'
-                size_hint: (None, None)
-                size: self.texture_size
+                size_hint_x: None
+                width: '100dp'
 
             Label:
                 id: bombshells_label
                 text: 'Bombshells: 0'
-                size_hint: (None, None)
-                size: self.texture_size
-
+                size_hint_x: None
+                width: '100dp'
