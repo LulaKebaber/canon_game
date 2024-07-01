@@ -6,7 +6,10 @@ from views.game_screen import GameScreen
 from views.weapon_selection_screen import WeaponSelectionScreen
 from controllers.game_controller import GameController
 from views.levels.level1 import Level1
+from kivy.config import Config
 
+Config.set('graphics', 'width', '1000')
+Config.set('graphics', 'height', '700')
 
 class GameApp(App):
     def build(self):

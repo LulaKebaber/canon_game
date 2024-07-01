@@ -22,7 +22,7 @@ class BombShell(Widget):
         super(BombShell, self).__init__(**kwargs)
         self.size_hint = (None, None)
         self.size = (50, 50)
-        self.pos = (300, 500)
+        self.pos = (200, 200)
         self.controller = controller
         self.color = [1, 0, 0, 1]
 
@@ -76,7 +76,7 @@ class BombShell(Widget):
         self.size = (200, 200)
 
     def reset_bombshell(self, *args):
-        self.pos = (300, 500)
+        self.pos = (200, 200)
         self.size = (50, 50)
         self.velocity = Vector(0, 0)
         self.acceleration = 0

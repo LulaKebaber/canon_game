@@ -15,19 +15,19 @@
 
             Button:
                 text: '1'
-                on_press: root.on_button_1_press()
+                on_press: root.choose_ball()
                 size_hint: None, None
                 size: '40dp', '40dp'
 
             Button:
                 text: '2'
-                on_press: root.on_button_2_press()
+                on_press: root.choose_laser()
                 size_hint: None, None
                 size: '40dp', '40dp'
 
             Button:
                 text: '3'
-                on_press: root.on_button_3_press()
+                on_press: root.choose_bombshell()
                 size_hint: None, None
                 size: '40dp', '40dp'
 
@@ -57,3 +57,5 @@
                 text: 'Bombshells: 0'
                 size_hint_x: None
                 width: '100dp'
+
+        

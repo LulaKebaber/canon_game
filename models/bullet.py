@@ -37,7 +37,7 @@ class Bullet(Widget):
         self.velocity_y -= self.acceleration
         self.pos = Vector(*self.velocity) + self.pos
 
-        if self.y > 1400 or self.y < -100 or self.x > 1900 or self.x < -100 or self.velocity_x == 0 and self.velocity_y == 0:
+        if self.y > 700 or self.y < 0 or self.x > 1000 or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
             self.reset_ball()
         if self.parent:
             self.parent.on_collision()

@@ -13,7 +13,7 @@ class Laser(Widget):
     end_pos = ()
     is_dragging = False
     is_launched = False
-    initial_pos = (300, 300)
+    initial_pos = (200, 200)
 
     def __init__(self, controller=None, **kwargs):
         super(Laser, self).__init__(**kwargs)

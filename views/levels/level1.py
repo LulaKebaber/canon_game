@@ -6,10 +6,14 @@ from kivy.graphics import Color, Rectangle
 from models.bullet import Bullet
 from models.laser import Laser
 from models.bombshell import BombShell
+from models.target import TargetWidget
 from .level_parser import LevelParser
+from kivy.config import Config
 
 Builder.load_file('views/levels/level1.kv')
-
+Config.set('graphics', 'resizable', False)
+Config.set('graphics', 'width', '1000')
+Config.set('graphics', 'height', '700')
 
 class Level1(Screen):
     parser = LevelParser("level1")
@@ -34,11 +38,7 @@ class Level1(Screen):
         targets = self.parser.parse_targets()
 
         for pos in level["positions"]:
-            target = Widget(size_hint=(None, None), size=targets["size"])
-            target.pos = pos
-            with target.canvas.before:
-                Color(targets["color"])
-                Rectangle(pos=target.pos, size=target.size)
+            target = TargetWidget(size=targets["size"], pos=pos, targets=targets)
             self.target_layout.add_widget(target)
 
     def update_bullets_label(self):
@@ -69,7 +69,7 @@ class Level1(Screen):
                     self.target_layout.remove_widget(target)
                     break
     
-    def on_button_1_press(self):
+    def choose_ball(self):
         if self.ball:
             self.remove_widget(self.ball)
         if self.laser:
@@ -79,7 +79,7 @@ class Level1(Screen):
         self.ball = Bullet(self.controller)
         self.add_widget(self.ball)
 
-    def on_button_2_press(self):
+    def choose_laser(self):
         if self.laser:
             self.remove_widget(self.laser)
         if self.ball:
@@ -89,7 +89,7 @@ class Level1(Screen):
         self.laser = Laser(self.controller)
         self.add_widget(self.laser)
 
-    def on_button_3_press(self):
+    def choose_bombshell(self):
         if self.bombshell:
             self.remove_widget(self.bombshell)
         if self.ball:
