@@ -1,12 +1,12 @@
 # views/levels/level1.py
 from kivy.uix.screenmanager import Screen
-from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.graphics import Color, Rectangle
 from models.bullet import Bullet
 from models.laser import Laser
 from models.bombshell import BombShell
 from models.target import TargetWidget
+from models.mirror import MirrorWidget
 from .level_parser import LevelParser
 from kivy.config import Config
 
@@ -40,6 +40,9 @@ class Level1(Screen):
         for pos in level["positions"]:
             target = TargetWidget(size=targets["size"], pos=pos, targets=targets)
             self.target_layout.add_widget(target)
+        
+        mirror = MirrorWidget(pos=(100, 100), size=(50, 50))
+        self.target_layout.add_widget(mirror)
 
     def update_bullets_label(self):
         bullets_label = self.ids.bullets_label
@@ -54,17 +57,21 @@ class Level1(Screen):
     def on_collision(self):
         for target in self.target_layout.children[:]:
             if self.ball:
-                if self.ball.collide_widget(target):
+                if self.ball.collide_widget(target) and target.widget_name == "target":
                     self.target_layout.remove_widget(target)
                     self.ball.reset_ball()
                     break
             if self.laser:
                 if self.laser.collide_widget(target):
-                    self.target_layout.remove_widget(target)
-                    self.laser.reset_laser()
-                    break
+                    if target.widget_name == "target":
+                        self.target_layout.remove_widget(target)
+                        self.laser.reset_laser()
+                        break
+                    elif target.widget_name == "mirror":
+                        self.laser.velocity_y *= -1
+                        break
             if self.bombshell:
-                if self.bombshell.collide_widget(target):
+                if self.bombshell.collide_widget(target) and target.widget_name == "target":
                     self.bombshell.animate_explosion()
                     self.target_layout.remove_widget(target)
                     break
