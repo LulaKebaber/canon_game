@@ -38,7 +38,7 @@ class Level1(Screen):
         targets = self.parser.parse_targets()
 
         for pos in level["positions"]:
-            target = TargetWidget(size=targets["size"], pos=pos, targets=targets)
+            target = TargetWidget(pos=pos, targets=targets)
             self.target_layout.add_widget(target)
         
         mirror = MirrorWidget(pos=(100, 100), size=(50, 50))
@@ -56,13 +56,13 @@ class Level1(Screen):
 
     def on_collision(self):
         for target in self.target_layout.children[:]:
-            if self.ball:
-                if self.ball.collide_widget(target):
-                    self.target_layout.remove_widget(target)
-                    self.ball.reset_ball()
-                    break
-            if self.laser:
-                if self.laser.collide_widget(target):
+            if hasattr(target, "widget_name"):
+                if self.ball and self.ball.collide_widget(target):
+                    if target.widget_name == "target":
+                        self.target_layout.remove_widget(target)
+                        self.ball.reset_ball()
+                        break
+                if self.laser and self.laser.collide_widget(target):
                     if target.widget_name == "target":
                         self.target_layout.remove_widget(target)
                         self.laser.reset_laser()
@@ -70,11 +70,11 @@ class Level1(Screen):
                     elif target.widget_name == "mirror":
                         self.laser.velocity_y *= -1
                         break
-            if self.bombshell:
-                if self.bombshell.collide_widget(target):
-                    self.bombshell.animate_explosion()
-                    self.target_layout.remove_widget(target)
-                    break
+                if self.bombshell and self.bombshell.collide_widget(target):
+                    if target.widget_name == "target":
+                        self.bombshell.animate_explosion()
+                        self.target_layout.remove_widget(target)
+                        break
     
     def choose_ball(self):
         if self.ball:

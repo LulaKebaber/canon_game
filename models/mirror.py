@@ -7,6 +7,7 @@ class MirrorWidget(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.widget_name = "mirror"
+        self.size_hint = (None, None)
         
-        self.image = Image(source='assets/mirror.png', size=(50, 50), pos=(100, 100))
+        self.image = Image(source='assets/mirror.png', size=self.size, pos=self.pos)
         self.add_widget(self.image)
