@@ -4,8 +4,8 @@ from kivy.graphics import Color, Rectangle
 class TargetWidget(Widget):
     def __init__(self, targets, **kwargs):
         super().__init__(**kwargs)
-        self.targets = targets
         self.widget_name = "target"
+        self.targets = targets
         self.size_hint = (None, None)
         self.size = targets["size"]
 

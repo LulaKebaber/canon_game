@@ -43,7 +43,7 @@ class BombShell(Widget):
         if self.y > 1400 or self.y < 0 or self.x > 1900 or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
             self.reset_bombshell()
         if self.parent:
-            self.parent.on_collision()
+            self.parent.on_collision_bombshell()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
