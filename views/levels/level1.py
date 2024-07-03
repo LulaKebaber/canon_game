@@ -57,7 +57,7 @@ class Level1(Screen):
     def on_collision(self):
         for target in self.target_layout.children[:]:
             if self.ball:
-                if self.ball.collide_widget(target) and target.widget_name == "target":
+                if self.ball.collide_widget(target):
                     self.target_layout.remove_widget(target)
                     self.ball.reset_ball()
                     break
@@ -71,7 +71,7 @@ class Level1(Screen):
                         self.laser.velocity_y *= -1
                         break
             if self.bombshell:
-                if self.bombshell.collide_widget(target) and target.widget_name == "target":
+                if self.bombshell.collide_widget(target):
                     self.bombshell.animate_explosion()
                     self.target_layout.remove_widget(target)
                     break
