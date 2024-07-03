@@ -2,7 +2,8 @@ from kivy.uix.widget import Widget
 from kivy.vector import Vector
 from kivy.clock import Clock
 from kivy.properties import NumericProperty, ReferenceListProperty
-from kivy.graphics import Rectangle, Color, Line
+from kivy.graphics import Rectangle, Color, Line, Ellipse
+
 
 
 class Laser(Widget):
@@ -25,15 +26,15 @@ class Laser(Widget):
 
         with self.canvas:
             Color(1, 0, 0)
-            self.rectangle = Rectangle(pos=self.pos, size=self.size)
+            self.ellipse = Ellipse(pos=self.pos, size=self.size)
             Color(1, 0, 0)
-            self.line = Line(points=[], width=6)  # Уменьшаем толщину следа от лазера
+            self.line = Line(points=[], width=10)  # Уменьшаем толщину следа от лазера
         self.bind(pos=self.update_graphics_pos, size=self.update_graphics_pos)
         Clock.schedule_interval(self.move, 1.0 / 60.0)
 
     def update_graphics_pos(self, *args):
-        self.rectangle.pos = self.pos
-        self.rectangle.size = self.size
+        self.ellipse.pos = self.pos
+        self.ellipse.size = self.size
 
     def move(self, dt):
         self.pos = Vector(*self.velocity) + self.pos
