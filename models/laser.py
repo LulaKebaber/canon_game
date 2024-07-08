@@ -47,7 +47,7 @@ class Laser(Widget):
             self.reset_laser()
 
         if self.parent:
-            self.parent.on_collision_laser()
+            self.parent.controller.on_collision_laser()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:

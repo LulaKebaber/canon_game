@@ -1,10 +1,6 @@
 # views/levels/level1.py
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.graphics import Color, Rectangle
-from models.bullet import Bullet
-from models.laser import Laser
-from models.bombshell import BombShell
 from models.target import TargetWidget
 from models.mirror import MirrorWidget
 from .level_parser import LevelParser
@@ -49,15 +45,6 @@ class Level1(Screen):
 
         bombshells_label = self.ids.bombshells_label
         bombshells_label.text = f"Bombshells: {int(self.weapon_quantities['bombshells'])}"
-    
-    def on_collision_bullet(self):
-        self.controller.on_collision_bullet()
-    
-    def on_collision_laser(self):
-        self.controller.on_collision_laser()
-    
-    def on_collision_bombshell(self):
-        self.controller.on_collision_bombshell()
 
     def choose_ball(self):
         self.controller.choose_ball()
@@ -67,6 +54,3 @@ class Level1(Screen):
 
     def choose_bombshell(self):
         self.controller.choose_bombshell()
-    
-    def clear_bullet_widgets(self):
-        self.controller.clear_bullet_widgets()

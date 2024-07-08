@@ -40,7 +40,7 @@ class Bullet(Widget):
         if self.y > 700 or self.y < 0 or self.x > 1000 or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
             self.reset_ball()
         if self.parent:
-            self.parent.on_collision_bullet()
+            self.parent.controller.on_collision_bullet()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
