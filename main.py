@@ -35,8 +35,8 @@ class GameApp(App):
         screen_manager.add_widget(weapon_selection_screen)
 
         # добавление первого уровня
-        level1 = Level1(name='level1')
-        level1.controller = game_controller
+        level1 = Level1(name='level1', controller=game_controller)
+        # level1.controller = game_controller
         screen_manager.add_widget(level1)
 
         # Устанавливаем главный экран как текущий

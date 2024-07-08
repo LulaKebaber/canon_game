@@ -18,17 +18,13 @@ Config.set('graphics', 'height', '700')
 class Level1(Screen):
     parser = LevelParser("level1")
 
-    def __init__(self, controller=None, **kw):
+    def __init__(self, controller, **kw):
         super().__init__(**kw)
-        self.ball = None
-        self.laser = None
-        self.bombshell = None
-        self.data = None
         self.weapon_quantities = None
         self.controller = controller
+        self.controller.set_level_screen(self)
 
     def on_enter(self):
-        self.data = self.parser.parse_json()
         self.weapon_quantities = self.controller.get_weapon_quantities()
         self.create_targets()
         self.update_bullets_label()
@@ -55,55 +51,22 @@ class Level1(Screen):
         bombshells_label.text = f"Bombshells: {int(self.weapon_quantities['bombshells'])}"
     
     def on_collision_bullet(self):
-        for target in self.target_layout.children:
-            if hasattr(target, "widget_name"):
-                if self.ball and self.ball.collide_widget(target):
-                    if target.widget_name == "target":
-                        self.target_layout.remove_widget(target)
-                        self.ball.reset_ball()
-                        break
+        self.controller.on_collision_bullet()
     
     def on_collision_laser(self):
-        for target in self.target_layout.children[:]:
-            if hasattr(target, "widget_name"):
-                if self.laser and self.laser.collide_widget(target):
-                    if target.widget_name == "target":
-                        self.target_layout.remove_widget(target)
-                        self.laser.reset_laser()
-                        break
-                    elif target.widget_name == "mirror":
-                        self.laser.velocity_y *= -1
-                        break
+        self.controller.on_collision_laser()
     
     def on_collision_bombshell(self):
-        for target in self.target_layout.children[:]:
-            if hasattr(target, "widget_name"):
-                if self.bombshell and self.bombshell.collide_widget(target):
-                    if target.widget_name == "target":
-                        self.bombshell.animate_explosion()
-                        self.target_layout.remove_widget(target)
-                        break
+        self.controller.on_collision_bombshell()
 
     def choose_ball(self):
-        self.clear_bullet_widgets()
-        self.ball = Bullet(self.controller)
-        self.add_widget(self.ball)
-
+        self.controller.choose_ball()
+    
     def choose_laser(self):
-        self.clear_bullet_widgets()
-        self.laser = Laser(self.controller)
-        self.add_widget(self.laser)
+        self.controller.choose_laser()
 
     def choose_bombshell(self):
-        self.clear_bullet_widgets()
-        self.bombshell = BombShell(self.controller)
-        self.add_widget(self.bombshell)
+        self.controller.choose_bombshell()
     
     def clear_bullet_widgets(self):
-        if self.ball:
-            self.remove_widget(self.ball)
-        if self.laser:
-            self.remove_widget(self.laser)
-        if self.bombshell:
-            self.remove_widget(self.bombshell)  
-    
+        self.controller.clear_bullet_widgets()
