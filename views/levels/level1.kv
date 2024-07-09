@@ -3,37 +3,32 @@
 
     FloatLayout:
         id: target_layout
-        size_hint: 1, 1
+        size_hint: (None, None)
 
-        # Добавляем BoxLayout для размещения кнопок слева сверху
         BoxLayout:
-            orientation: 'vertical'
+            orientation: 'horizontal'
             size_hint: None, None
-            size: 80, 240  # Размер BoxLayout будет равен 80x240 пикселей
-            pos: 10, 270  # Позиция слева сверху
+            size: 80, 240
+            pos: 0, 620
+            spacing: 10
 
-            # Кнопка 1
             Button:
-                text: 'Button 1'
+                text: 'Bullet'
                 on_press: root.choose_ball()
                 size_hint: None, None
                 size: 80, 80
 
-            # Кнопка 2
             Button:
-                text: 'Button 2'
+                text: 'Laser'
                 on_press: root.choose_laser()
                 size_hint: None, None
                 size: 80, 80
 
-            # Кнопка 3
             Button:
-                text: 'Button 3'
+                text: 'Bombshell'
                 on_press: root.choose_bombshell()
                 size_hint: None, None
                 size: 80, 80
-
-        # Остальной ваш код остается без изменений
 
         BoxLayout:
             orientation: 'horizontal'

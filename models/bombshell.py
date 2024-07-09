@@ -5,33 +5,29 @@ from kivy.clock import Clock
 from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.graphics import Ellipse, Color
 from kivy.animation import Animation
+from canon_constants import BOMBSHELL_SIZE, BOMBSHELL_COLOR, FPS, INITIAL_POS, GRAVITY, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class BombShell(Widget):
     widget_name = "bombshell"
-    velocity_x = NumericProperty(0)
-    velocity_y = NumericProperty(0)
+    velocity_x, velocity_y = NumericProperty(0), NumericProperty(0)
     velocity = ReferenceListProperty(velocity_x, velocity_y)
-    start_pos = ()
-    end_pos = ()
-    is_dragging = False
-    is_launched = False
-    is_exploded = False
+    start_pos, end_pos = (), ()
+    is_dragging, is_launched, is_exploded = False, False, False
     acceleration = 0
 
     def __init__(self, controller=None, **kwargs):
         super(BombShell, self).__init__(**kwargs)
-        self.size_hint = (None, None)
-        self.size = (50, 50)
-        self.pos = (200, 200)
         self.controller = controller
-        self.color = [1, 0, 0, 1]
+        self.size_hint = (None, None)
+        self.size = BOMBSHELL_SIZE
+        self.pos = INITIAL_POS
 
         with self.canvas:
-            Color(1, 1, 1)
+            Color(*BOMBSHELL_COLOR)
             self.ellipse = Ellipse(pos=self.pos, size=self.size)
         self.bind(pos=self.update_graphics_pos, size=self.update_graphics_pos)
-        Clock.schedule_interval(self.move, 1.0 / 60.0)
+        Clock.schedule_interval(self.move, 1.0 / FPS)
 
     def update_graphics_pos(self, *args):
         self.ellipse.pos = self.pos
@@ -41,7 +37,7 @@ class BombShell(Widget):
         self.velocity_y -= self.acceleration
         self.pos = Vector(*self.velocity) + self.pos
 
-        if self.y > 1400 or self.y < 0 or self.x > 1900 or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
+        if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
             self.reset_bombshell()
         if self.parent:
             self.parent.controller.on_collision_bombshell()
@@ -63,10 +59,10 @@ class BombShell(Widget):
             self.parent.controller.update_bullets_label()
 
     def move_ball(self):
-        direction = Vector(*self.end_pos) - Vector(*self.start_pos)
-        self.velocity = direction * -0.1
+        direction = Vector(*self.start_pos) - Vector(*self.end_pos)
+        self.velocity = direction / 10
         self.is_launched = True
-        self.acceleration = 0.2
+        self.acceleration = GRAVITY
 
     def animate_explosion(self, *args):
         # explosion_animation = Animation(size=(100, 100), duration=0.5)
@@ -77,8 +73,8 @@ class BombShell(Widget):
         self.size = (200, 200)
 
     def reset_bombshell(self, *args):
-        self.pos = (200, 200)
-        self.size = (50, 50)
+        self.pos = INITIAL_POS
+        self.size = BOMBSHELL_SIZE
         self.velocity = Vector(0, 0)
         self.acceleration = 0
         self.is_launched = False

@@ -33,7 +33,7 @@ class Level1(Screen):
             target = TargetWidget(pos=pos, targets=targets)
             self.target_layout.add_widget(target)
         
-        mirror = MirrorWidget(pos=(100, 100), size=(50, 50))
+        mirror = MirrorWidget(pos=(400, 20), size=(100, 50))
         self.target_layout.add_widget(mirror)
 
     def choose_ball(self):
