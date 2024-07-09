@@ -7,6 +7,7 @@ from kivy.graphics import Ellipse, Color
 
 
 class Bullet(Widget):
+    widget_name = "bullet"
     velocity_x = NumericProperty(0)
     velocity_y = NumericProperty(0)
     velocity = ReferenceListProperty(velocity_x, velocity_y)
@@ -56,7 +57,7 @@ class Bullet(Widget):
             self.is_dragging = False
             self.controller.weapon_quantities['bullets'] -= 1
             self.move_ball()
-            self.parent.update_bullets_label()
+            self.parent.controller.update_bullets_label()
 
     def move_ball(self):
         direction = Vector(*self.end_pos) - Vector(*self.start_pos)

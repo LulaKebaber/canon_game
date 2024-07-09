@@ -3,6 +3,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from views.main_menu import MainMenu
 from views.game_screen import GameScreen
+from views.end_game_screen import EndGameScreen
 from views.weapon_selection_screen import WeaponSelectionScreen
 from controllers.game_controller import GameController
 from views.levels.level1 import Level1
@@ -36,8 +37,11 @@ class GameApp(App):
 
         # добавление первого уровня
         level1 = Level1(name='level1', controller=game_controller)
-        # level1.controller = game_controller
         screen_manager.add_widget(level1)
+
+        end_game_screen = EndGameScreen(name='end_game_screen', controller=game_controller)
+        screen_manager.add_widget(end_game_screen)
+        # end_game_screen.controller = game_controller
 
         # Устанавливаем главный экран как текущий
         screen_manager.current = 'main_menu'

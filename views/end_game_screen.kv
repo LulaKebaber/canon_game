@@ -1,0 +1,23 @@
+<EndGameScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: [100, 100, 100, 100]
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1  # Черный фон
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Button:
+            text: 'Restart'
+            size_hint: (None, None)
+            size: (200, 50)
+            pos_hint: {'center_x': 0.5}
+            on_release: root.on_restart_game()
+        Button:
+            text: 'Main Menu'
+            size_hint: (None, None)
+            size: (200, 50)
+            pos_hint: {'center_x': 0.5}
+            on_release: root.on_main_menu()

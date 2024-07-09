@@ -7,6 +7,7 @@ from kivy.graphics import Rectangle, Color, Line, Ellipse
 
 
 class Laser(Widget):
+    widget_name = "laser"
     velocity_x = NumericProperty(0)
     velocity_y = NumericProperty(0)
     velocity = ReferenceListProperty(velocity_x, velocity_y)
@@ -62,7 +63,7 @@ class Laser(Widget):
         if self.is_dragging:
             self.is_dragging = False
             self.controller.weapon_quantities['lasers'] -= 1
-            self.parent.update_bullets_label()
+            self.parent.controller.update_bullets_label()
             self.launch()
 
     def launch(self):

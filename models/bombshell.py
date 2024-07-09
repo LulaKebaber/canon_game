@@ -8,6 +8,7 @@ from kivy.animation import Animation
 
 
 class BombShell(Widget):
+    widget_name = "bombshell"
     velocity_x = NumericProperty(0)
     velocity_y = NumericProperty(0)
     velocity = ReferenceListProperty(velocity_x, velocity_y)
@@ -59,7 +60,7 @@ class BombShell(Widget):
             self.is_dragging = False
             self.controller.weapon_quantities['bombshells'] -= 1
             self.move_ball()
-            self.parent.update_bullets_label()
+            self.parent.controller.update_bullets_label()
 
     def move_ball(self):
         direction = Vector(*self.end_pos) - Vector(*self.start_pos)

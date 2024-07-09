@@ -23,7 +23,7 @@ class Level1(Screen):
     def on_enter(self):
         self.weapon_quantities = self.controller.get_weapon_quantities()
         self.create_targets()
-        self.update_bullets_label()
+        self.controller.update_bullets_label()
 
     def create_targets(self):
         level = self.parser.parse_level()
@@ -35,16 +35,6 @@ class Level1(Screen):
         
         mirror = MirrorWidget(pos=(100, 100), size=(50, 50))
         self.target_layout.add_widget(mirror)
-
-    def update_bullets_label(self):
-        bullets_label = self.ids.bullets_label
-        bullets_label.text = f"Bullets: {int(self.weapon_quantities['bullets'])}"
-
-        lasers_label = self.ids.lasers_label
-        lasers_label.text = f"Lasers: {int(self.weapon_quantities['lasers'])}"
-
-        bombshells_label = self.ids.bombshells_label
-        bombshells_label.text = f"Bombshells: {int(self.weapon_quantities['bombshells'])}"
 
     def choose_ball(self):
         self.controller.choose_ball()
