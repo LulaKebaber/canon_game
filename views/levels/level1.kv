@@ -7,6 +7,18 @@
 
         BoxLayout:
             orientation: 'horizontal'
+            size_hint: (None, None)
+            pos: 470, 650 
+
+            Label:
+                id: score_label
+                text: 'Score: 0'
+                size_hint: (None, None)
+                font_size: '26sp'
+                size: self.texture_size
+
+        BoxLayout:
+            orientation: 'horizontal'
             size_hint: None, None
             size: 80, 240
             pos: 0, 620

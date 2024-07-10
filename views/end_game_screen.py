@@ -8,7 +8,7 @@ class EndGameScreen(Screen):
     def __init__(self, controller, **kwargs):
         super().__init__(**kwargs)
         self.controller = controller
-
+    
     def on_restart_game(self):
         self.controller.screen_manager.current = "level1"
 

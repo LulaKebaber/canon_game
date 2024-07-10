@@ -8,6 +8,7 @@ class GameController:
     def __init__(self, screen_manager: ScreenManager):
         self.screen_manager = screen_manager
         self.weapon_quantities = {}
+        self.score = 0
         self.ball = None
         self.laser = None
         self.bombshell = None
@@ -23,6 +24,7 @@ class GameController:
     
     def end_game(self):
         self.screen_manager.current = "end_game_screen"
+        self.score = 0
 
     def get_weapon_quantities(self):
         return self.weapon_quantities
@@ -36,6 +38,10 @@ class GameController:
 
         bombshells_label = self.level_screen.ids.bombshells_label
         bombshells_label.text = f"Bombshells: {int(self.weapon_quantities['bombshells'])}"
+
+    def update_score_label(self):
+        score_label = self.level_screen.ids.score_label
+        score_label.text = f"Score: {self.score}"
 
     def set_level_screen(self, level_screen):
         self.level_screen = level_screen
@@ -68,6 +74,8 @@ class GameController:
             if hasattr(target, "widget_name"):
                 if weapon and weapon.collide_widget(target):
                     if target.widget_name == "target":
+                        self.score += 1
+                        self.update_score_label()
                         self.level_screen.target_layout.remove_widget(target)
                         if weapon.widget_name != "laser":
                             reset_method()

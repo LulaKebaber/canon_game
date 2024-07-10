@@ -20,3 +20,4 @@ LASER_COLOR = (1, 0, 0)
 # Bombshell constants
 BOMBSHELL_SIZE = (50, 50)
 BOMBSHELL_COLOR = (1, 0, 1)
+

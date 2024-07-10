@@ -24,6 +24,7 @@ class Level1(Screen):
         self.weapon_quantities = self.controller.get_weapon_quantities()
         self.create_targets()
         self.controller.update_bullets_label()
+        self.controller.update_score_label()
 
     def create_targets(self):
         level = self.parser.parse_level()
