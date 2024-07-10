@@ -7,10 +7,10 @@ Builder.load_file('views/weapon_selection_screen.kv')
 
 
 class WeaponSelectionScreen(Screen):
-    def __init__(self, **kwargs):
+    def __init__(self, controller=None, **kwargs):
         super().__init__(**kwargs)
-        self.controller = kwargs.get('controller')
-
+        self.controller = controller
+        
     def start_game(self):
         self.controller.start_game('level1', self.ids.bullets_slider.value, self.ids.bombshells_slider.value, self.ids.lasers_slider.value)
 
