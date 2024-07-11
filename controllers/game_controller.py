@@ -1,13 +1,12 @@
 # controllers/game_controller.py
 import json
-from kivy.uix.screenmanager import ScreenManager
 from models.bullet import Bullet
 from models.laser import Laser
 from models.bombshell import BombShell
 
 
 class GameController:
-    def __init__(self, screen_manager: ScreenManager):
+    def __init__(self, screen_manager):
         self.screen_manager = screen_manager
         self.weapon_quantities = {}
         self.weapon_quantities_initial = {}
@@ -38,7 +37,7 @@ class GameController:
             records["records"][str(len(records["records"]) + 1)] = {
                 "id": len(records["records"]) + 1,
                 "score": score,
-                "bullets_spent": self.get_weapon_bullets_spent()
+                "bullets_spent": [int(i) for i in list(self.get_weapon_bullets_spent().values())]
             }
         with open("data/records.json", "w") as file:
             json.dump(records, file)

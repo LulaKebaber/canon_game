@@ -8,14 +8,12 @@ class LevelParser:
 
     def _load_data(self):
         try:
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            json_path = os.path.join(current_dir, "levels.json")
-            with open(json_path) as file:
+            with open("data/levels.json") as file:
                 return json.load(file)
         except FileNotFoundError:
-            raise FileNotFoundError(f"File {json_path} not found.")
+            raise FileNotFoundError(f"File {"data/levels.json"} not found.")
         except json.JSONDecodeError:
-            raise ValueError(f"File {json_path} contains invalid JSON.")
+            raise ValueError(f"File {"data/levels.json"} contains invalid JSON.")
     
     def parse_targets(self):
         try:
