@@ -2,8 +2,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 
-Builder.load_file('views/game_screen.kv')
-
 
 class GameScreen(Screen):
     def start_new_game(self):

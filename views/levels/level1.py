@@ -1,15 +1,14 @@
 # views/levels/level1.py
 from kivy.uix.screenmanager import Screen
-from kivy.lang import Builder
 from models.target import TargetWidget
 from models.mirror import MirrorWidget
-from .level_parser import LevelParser
+from controllers.level_parser import LevelParser
 from kivy.config import Config
 
-Builder.load_file('views/levels/level1.kv')
 Config.set('graphics', 'resizable', False)
 Config.set('graphics', 'width', '1000')
 Config.set('graphics', 'height', '700')
+
 
 class Level1(Screen):
     parser = LevelParser("level1")

@@ -1,7 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 
-Builder.load_file('views/ranking_screen.kv')
 
 class RankingScreen(Screen):
     def __init__(self, controller=None, **kwargs):

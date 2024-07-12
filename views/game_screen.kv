@@ -1,4 +1,36 @@
 # game_screen.kv
+<Button>:
+    font_size: 20
+
+
+# main_menu.kv
+
+<MainMenu>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        size_hint: (None, None)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        Button:
+            text: 'Play'
+            size_hint: (None, None)
+            size: (200, 50)
+            on_release: root.start_game()
+
+        Button:
+            text: 'Ranking'
+            size_hint: (None, None)
+            size: (200, 50)
+            on_release: root.show_ranking()
+
+        Button:
+            text: 'Help'
+            size_hint: (None, None)
+            size: (200, 50)
+            on_release: app.root.controller.show_help()
+
+
 
 <GameScreen>:
     BoxLayout:
@@ -24,3 +56,155 @@
             size_hint: (None, None)
             size: (200, 50)
             on_release: app.root.controller.select_level()
+
+
+<WeaponSelectionScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Select Weapon Quantities'
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Bullets:'
+            Slider:
+                id: bullets_slider
+                min: 0
+                max: 52
+                value: 0
+                on_value: root.update_bullets_label(bullets_slider.value)
+            Label:
+                id: bullets_value
+                text: str(bullets_slider.value)
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Bombshells:'
+            Slider:
+                id: bombshells_slider
+                min: 0
+                max: 52
+                value: 0
+                on_value: root.update_bombshells_label(bombshells_slider.value)
+            Label:
+                id: bombshells_value
+                text: str(bombshells_slider.value)
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Lasers:'
+            Slider:
+                id: lasers_slider
+                min: 0
+                max: 52
+                value: 0
+                on_value: root.update_lasers_label(lasers_slider.value)
+            Label:
+                id: lasers_value
+                text: str(lasers_slider.value)
+
+        Button:
+            text: 'Start Game'
+            on_release: root.start_game()
+
+
+<RankingScreen>:
+    AnchorLayout:
+        anchor_y: 'top'
+        padding: 10
+        spacing: 10
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: 10
+
+            Label:
+                text: 'Ranking'
+                font_size: '32sp'
+                size_hint_y: None
+                height: 50
+
+            GridLayout:
+                cols: 5
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+                Label:
+                    text: 'ID'
+                    font_size: '20sp'
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: 'Score'
+                    font_size: '20sp'
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: 'Bullets'
+                    font_size: '20sp'
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: 'Lasers'
+                    font_size: '20sp'
+                    size_hint_y: None
+                    height: 40
+                Label:
+                    text: 'Bombshells'
+                    font_size: '20sp'
+                    size_hint_y: None
+                    height: 40
+
+            ScrollView:
+                size_hint_y: None
+                height: 200
+
+                GridLayout:
+                    id: record_table
+                    cols: 5
+                    spacing: 10
+                    size_hint_y: None
+                    height: self.minimum_height
+
+            Button:
+                text: 'Back to Menu'
+                size_hint: None, None
+                height: 50
+                width: 200
+                pos_hint: {'center_x': 0.5}
+                on_press: app.root.current = 'main_menu'
+
+
+<EndGameScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: [100, 100, 100, 100]
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1  # Черный фон
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Button:
+            text: 'Restart'
+            size_hint: (None, None)
+            size: (200, 50)
+            pos_hint: {'center_x': 0.5}
+            on_release: root.on_restart_game()
+        Button:
+            text: 'Main Menu'
+            size_hint: (None, None)
+            size: (200, 50)
+            pos_hint: {'center_x': 0.5}
+            on_release: root.on_main_menu()

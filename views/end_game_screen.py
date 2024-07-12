@@ -2,7 +2,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 
-Builder.load_file('views/end_game_screen.kv')
 
 class EndGameScreen(Screen):
     def __init__(self, controller, **kwargs):

@@ -11,9 +11,13 @@ from controllers.ranking_controller import RankingController
 from views.levels.level1 import Level1
 from kivy.config import Config
 from canon_constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from kivy.lang import Builder
+
 
 Config.set('graphics', 'width', SCREEN_WIDTH)
 Config.set('graphics', 'height', SCREEN_HEIGHT)
+Builder.load_file('views/game_screen.kv')
+Builder.load_file('views/levels/level1.kv')
 
 class GameApp(App):
     def build(self):

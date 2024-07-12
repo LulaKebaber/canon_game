@@ -11,9 +11,9 @@ class LevelParser:
             with open("data/levels.json") as file:
                 return json.load(file)
         except FileNotFoundError:
-            raise FileNotFoundError(f"File {"data/levels.json"} not found.")
+            raise FileNotFoundError("File data/levels.json not found.")
         except json.JSONDecodeError:
-            raise ValueError(f"File {"data/levels.json"} contains invalid JSON.")
+            raise ValueError("File data/levels.json contains invalid JSON.")
     
     def parse_targets(self):
         try:

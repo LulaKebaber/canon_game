@@ -1,9 +1,6 @@
 # views/weapon_selection_screen.py
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from controllers.game_controller import GameController
-
-Builder.load_file('views/weapon_selection_screen.kv')
 
 
 class WeaponSelectionScreen(Screen):
