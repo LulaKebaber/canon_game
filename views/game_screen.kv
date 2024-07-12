@@ -2,8 +2,9 @@
 <Button>:
     font_size: 20
 
+<Label>:
+    font_size: 20
 
-# main_menu.kv
 
 <MainMenu>:
     BoxLayout:
@@ -29,8 +30,7 @@
             size_hint: (None, None)
             size: (200, 50)
             on_release: app.root.controller.show_help()
-
-
+    
 
 <GameScreen>:
     BoxLayout:
@@ -111,6 +111,9 @@
                 text: str(lasers_slider.value)
 
         Button:
+            size_hint: (None, None)
+            size: (200, 50)
+            pos_hint: {'center_x': 0.5}
             text: 'Start Game'
             on_release: root.start_game()
 
@@ -167,7 +170,7 @@
 
             ScrollView:
                 size_hint_y: None
-                height: 200
+                height: 400
 
                 GridLayout:
                     id: record_table

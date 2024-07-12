@@ -21,32 +21,33 @@
             orientation: 'horizontal'
             size_hint: None, None
             size: 80, 240
-            pos: 0, 620
-            spacing: 10
+            pos: 20, 620
+            spacing: 20
 
             Button:
                 text: 'Bullet'
                 on_press: root.choose_ball()
                 size_hint: None, None
-                size: 80, 80
+                size: 100, 60
 
             Button:
                 text: 'Laser'
                 on_press: root.choose_laser()
                 size_hint: None, None
-                size: 80, 80
+                size: 100, 60
 
             Button:
                 text: 'Bombshell'
                 on_press: root.choose_bombshell()
                 size_hint: None, None
-                size: 80, 80
+                size: 100, 60
 
         BoxLayout:
             orientation: 'horizontal'
             size_hint: (None, None)
             size: 200, 50
             pos: 10, 10
+            spacing: 10
 
             Label:
                 id: bullets_label
