@@ -17,6 +17,7 @@ class Bullet(Widget):
     def __init__(self, controller=None, **kwargs):
         super(Bullet, self).__init__(**kwargs)
         self.controller = controller
+        self.collided_widgets = None
         self.size_hint = (None, None)
         self.size = BULLET_SIZE
         self.pos = INITIAL_POS
@@ -37,15 +38,16 @@ class Bullet(Widget):
         self.pos = Vector(*self.velocity) + self.pos
 
         if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
-            self.reset_ball()
+            self.reset_bullet()
         if self.parent:
-            self.parent.controller.on_collision_bullet()
+            self.collided_widgets = self.parent.controller.on_collision_bullet()
+            self.handle_collision()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
             self.start_pos = touch.pos
             self.is_dragging = True
-            
+
     def on_touch_up(self, touch):
         if self.is_dragging:
             self.end_pos = touch.pos
@@ -60,7 +62,15 @@ class Bullet(Widget):
         self.is_launched = True
         self.acceleration = GRAVITY
 
-    def reset_ball(self):
+    def handle_collision(self):
+        if self.collided_widgets:
+            if self.collided_widgets[0] == "target":
+                self.controller.score += 1
+                self.reset_bullet()
+            elif self.collided_widgets[0] == "obstacle":
+                self.reset_bullet()
+
+    def reset_bullet(self):
         self.pos = INITIAL_POS
         self.velocity = Vector(0, 0)
         self.acceleration = 0

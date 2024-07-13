@@ -92,32 +92,26 @@ class GameController:
         if self.bombshell:
             self.level_screen.remove_widget(self.bombshell)
 
-    def on_collision(self, weapon, reset_method):
+    def on_collision(self, weapon):
+        collided_widgets_names = []
         for target in self.level_screen.target_layout.children:
             if hasattr(target, "widget_name"):
                 if weapon and weapon.collide_widget(target):
+                    collided_widgets_names.append(target.widget_name)
                     if target.widget_name == "target":
-                        self.score += 1
-                        self.update_score_label()
                         self.level_screen.target_layout.remove_widget(target)
-                        if weapon.widget_name != "laser":
-                            reset_method()
-                        self.check_targets_left()
-                        break
-                    elif target.widget_name == "obstacle" and weapon.widget_name != "laser":
-                        reset_method()
-                    elif target.widget_name == "mirror" and weapon.widget_name == "laser":
-                        weapon.velocity_y *= -1
-                        break
+                    self.update_score_label()
+                    self.check_targets_left()
+        return collided_widgets_names
 
     def on_collision_bullet(self):
-        self.on_collision(self.ball, self.ball.reset_ball)
+        return self.on_collision(self.ball)
 
     def on_collision_laser(self):
-        self.on_collision(self.laser, self.laser.reset_laser)
+        return self.on_collision(self.laser)
 
     def on_collision_bombshell(self):
-        self.on_collision(self.bombshell, self.bombshell.reset_bombshell)
+        return self.on_collision(self.bombshell)
 
     def check_targets_left(self):
         targets_left = any(

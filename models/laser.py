@@ -16,6 +16,7 @@ class Laser(Widget):
     def __init__(self, controller=None, **kwargs):
         super(Laser, self).__init__(**kwargs)
         self.controller = controller
+        self.collided_widgets = None
         self.size_hint = (None, None)
         self.size = LASER_SIZE
         self.pos = INITIAL_POS
@@ -44,7 +45,8 @@ class Laser(Widget):
             self.reset_laser()
 
         if self.parent:
-            self.parent.controller.on_collision_laser()
+            self.collided_widgets = self.parent.controller.on_collision_laser()
+            self.handle_collision()
         
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
@@ -70,6 +72,14 @@ class Laser(Widget):
         self.velocity = direction.normalize() * -self.speed
         self.is_launched = True
         self.path_points = [self.center_x, self.center_y]
+
+    def handle_collision(self):
+        if self.collided_widgets:
+            for collided_widget in self.collided_widgets:
+                if collided_widget == "target":
+                    self.controller.score += 1
+                elif collided_widget == "mirror":
+                    self.velocity_y *= -1
 
     def reset_laser(self):
         self.pos = INITIAL_POS

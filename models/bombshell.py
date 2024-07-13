@@ -19,6 +19,7 @@ class BombShell(Widget):
     def __init__(self, controller=None, **kwargs):
         super(BombShell, self).__init__(**kwargs)
         self.controller = controller
+        self.collided_widgets_names = None
         self.size_hint = (None, None)
         self.size = BOMBSHELL_SIZE
         self.pos = INITIAL_POS
@@ -37,10 +38,13 @@ class BombShell(Widget):
         self.velocity_y -= self.acceleration
         self.pos = Vector(*self.velocity) + self.pos
 
-        if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
+        if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0:
             self.reset_bombshell()
         if self.parent:
-            self.parent.controller.on_collision_bombshell()
+            self.collided_widgets_names = self.parent.controller.on_collision_bombshell()
+            self.handle_collision()
+        if self.is_exploded:
+            self.explode()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
@@ -64,13 +68,22 @@ class BombShell(Widget):
         self.is_launched = True
         self.acceleration = GRAVITY
 
-    def animate_explosion(self, *args):
-        # explosion_animation = Animation(size=(100, 100), duration=0.5)
-        # explosion_animation += Animation(color=(1, 1, 0, 1), duration=0.5)
-        # explosion_animation.start(self)            # explosion_animation.bind(on_complete=self.reset_bombshell)
-        self.velocity = (0, 0)
+    def handle_collision(self):
+        if self.collided_widgets_names:
+            for collided_widget in self.collided_widgets_names:
+                if collided_widget == "target":
+                    self.controller.score += 1
+                    self.is_exploded = True
+                elif collided_widget == "obstacle":
+                    self.is_exploded = True
+    
+    def explode(self):
+        self.velocity = Vector(0, 0)
         self.acceleration = 0
-        self.size = (200, 200)
+        self.size = (self.size[0] + 30, self.size[1] + 30)
+        self.pos = (self.pos[0] - 15, self.pos[1] - 15)
+        if self.size[0] > 200:
+            self.reset_bombshell()
 
     def reset_bombshell(self, *args):
         self.pos = INITIAL_POS
