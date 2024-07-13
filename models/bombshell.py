@@ -94,7 +94,8 @@ class BombShell(Widget):
         self.acceleration = 0
         self.is_launched = False
         self.is_exploded = False
-        self.parent.controller.check_targets_left()
-        self.parent.controller.check_bullets()
+        if self.parent:
+            self.parent.controller.check_targets_left()
+            self.parent.controller.check_bullets()
 
 

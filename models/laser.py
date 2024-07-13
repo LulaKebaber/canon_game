@@ -89,5 +89,6 @@ class Laser(Widget):
         self.is_launched = False
         self.path_points = []
         self.line.points = []
-        self.parent.controller.check_targets_left()
-        self.parent.controller.check_bullets()
+        if self.parent:
+            self.parent.controller.check_targets_left()
+            self.parent.controller.check_bullets()

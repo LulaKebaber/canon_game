@@ -25,6 +25,7 @@ class GameController:
         }
         self.weapon_quantities_initial = self.weapon_quantities.copy()
         self.screen_manager.current = "level_screen"
+        self.check_bullets()
     
     def end_game(self):
         self.screen_manager.current = "end_game_screen"
@@ -102,7 +103,7 @@ class GameController:
                     if target.widget_name == "target":
                         self.level_screen.target_layout.remove_widget(target)
         return collided_widgets_names
-    
+
     def check_targets_left(self):
         targets_left = any(
             hasattr(child, 'widget_name') and child.widget_name == 'target'

@@ -162,21 +162,6 @@
             orientation: 'horizontal'
 
             Label:
-                text: 'Bombshells:'
-            Slider:
-                id: bombshells_slider
-                min: 0
-                max: 52
-                value: 0
-                on_value: root.update_bombshells_label(bombshells_slider.value)
-            Label:
-                id: bombshells_value
-                text: str(bombshells_slider.value)
-
-        BoxLayout:
-            orientation: 'horizontal'
-
-            Label:
                 text: 'Lasers:'
             Slider:
                 id: lasers_slider
@@ -187,6 +172,21 @@
             Label:
                 id: lasers_value
                 text: str(lasers_slider.value)
+        
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Bombshells:'
+            Slider:
+                id: bombshells_slider
+                min: 0
+                max: 52
+                value: 0
+                on_value: root.update_bombshells_label(bombshells_slider.value)
+            Label:
+                id: bombshells_value
+                text: str(bombshells_slider.value)
 
         Button:
             size_hint: (None, None)
