@@ -4,17 +4,15 @@ from models.target import TargetWidget
 from models.obstacle import ObstacleWidget
 from models.mirror import MirrorWidget
 from controllers.level_parser import LevelParser
-from kivy.config import Config
 
 
 class Level(Screen):
-    parser = LevelParser("level1")
-
     def __init__(self, controller=None, **kwargs):
         super().__init__(**kwargs)
         self.weapon_quantities = None
         self.controller = controller
         self.controller.set_level_screen(self)
+        self.parser = LevelParser()
 
     def on_enter(self):
         self.weapon_quantities = self.controller.get_weapon_quantities()
@@ -23,6 +21,8 @@ class Level(Screen):
         self.controller.update_score_label()
 
     def initialize_level(self):
+        if self.controller.selected_level:
+            self.parser.level = self.controller.selected_level
         self.level_info = self.parser.parse_level_info()
         self.create_targets()
         self.create_obstacles()

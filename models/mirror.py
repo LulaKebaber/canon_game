@@ -12,6 +12,9 @@ class MirrorWidget(Widget):
         self.image = Image(source='assets/mirror.png')
         self.size = self.image.texture_size
 
-        with self.canvas:
+        self.update_graphics()
+    
+    def update_graphics(self):
+        with self.canvas.before:
             Color(1, 1, 1, 1)
             Rectangle(texture=self.image.texture, pos=self.pos, size=self.size)

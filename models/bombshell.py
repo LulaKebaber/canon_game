@@ -44,6 +44,7 @@ class BombShell(Widget):
             if self.parent:
                 self.collided_widgets_names = self.parent.controller.on_collision(self)
                 self.handle_collision()
+                self.parent.controller.update_score_label()
             if self.is_exploded:
                 self.explode()
 
@@ -86,12 +87,13 @@ class BombShell(Widget):
         if self.size[0] > 200:
             self.reset_bombshell()
 
-    def reset_bombshell(self, *args):
+    def reset_bombshell(self):
         self.pos = INITIAL_POS
         self.size = BOMBSHELL_SIZE
         self.velocity = Vector(0, 0)
         self.acceleration = 0
         self.is_launched = False
         self.is_exploded = False
+        self.parent.controller.check_targets_left()
 
 

@@ -1,6 +1,5 @@
 # views/end_game_screen.py
 from kivy.uix.screenmanager import Screen
-from kivy.lang import Builder
 
 
 class EndGameScreen(Screen):
@@ -9,7 +8,7 @@ class EndGameScreen(Screen):
         self.controller = controller
     
     def on_restart_game(self):
-        self.controller.screen_manager.current = "level1"
+        self.controller.screen_manager.current = "level_screen"
 
     def back_to_menu(self):
         self.controller.screen_manager.current = "main_menu_screen"

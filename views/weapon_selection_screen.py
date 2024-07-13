@@ -9,7 +9,7 @@ class WeaponSelectionScreen(Screen):
         self.controller = controller
         
     def start_game(self):
-        self.controller.start_game('level1', self.ids.bullets_slider.value, self.ids.bombshells_slider.value, self.ids.lasers_slider.value)
+        self.controller.start_game(self.ids.bullets_slider.value, self.ids.bombshells_slider.value, self.ids.lasers_slider.value)
 
     def update_bullets_label(self, value):
         self.ids.bullets_value.text = str(int(value))

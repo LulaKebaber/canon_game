@@ -43,6 +43,7 @@ class Bullet(Widget):
             if self.parent:
                 self.collided_widgets = self.parent.controller.on_collision(self)
                 self.handle_collision()
+                self.parent.controller.update_score_label()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
@@ -76,4 +77,5 @@ class Bullet(Widget):
         self.velocity = Vector(0, 0)
         self.acceleration = 0
         self.is_launched = False
+        self.parent.controller.check_targets_left()
 

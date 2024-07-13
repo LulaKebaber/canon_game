@@ -8,6 +8,7 @@ from models.bombshell import BombShell
 class GameController:
     def __init__(self, screen_manager):
         self.screen_manager = screen_manager
+        self.selected_level = None
         self.weapon_quantities = {}
         self.weapon_quantities_initial = {}
         self.score = 0
@@ -16,20 +17,22 @@ class GameController:
         self.bombshell = None
         self.level_screen = None
 
-    def start_game(self, level, bullets, bombshells, lasers):
+    def start_game(self, bullets, bombshells, lasers):
         self.weapon_quantities = {
             'bullets': bullets,
             'bombshells': bombshells,
             'lasers': lasers
         }
         self.weapon_quantities_initial = self.weapon_quantities.copy()
-        self.screen_manager.current = level
+        self.screen_manager.current = "level_screen"
     
     def end_game(self):
         self.screen_manager.current = "end_game_screen"
         self.save_score(self.score)
         self.weapon_quantities = self.weapon_quantities_initial.copy()
         self.score = 0
+        self.update_score_label()
+        self.clear_canvas()
 
     def save_score(self, score):
         with open("data/records.json", "r") as file:
@@ -104,8 +107,6 @@ class GameController:
                     collided_widgets_names.append(target.widget_name)
                     if target.widget_name == "target":
                         self.level_screen.target_layout.remove_widget(target)
-                    self.update_score_label()
-                    self.check_targets_left()
         return collided_widgets_names
 
     def check_targets_left(self):
@@ -115,3 +116,8 @@ class GameController:
         )
         if not targets_left:
             self.end_game()
+    
+    def clear_canvas(self):
+        for child in self.level_screen.target_layout.children:
+            if hasattr(child, 'widget_name') and (child.widget_name == 'target' or child.widget_name == 'obstacle' or child.widget_name == 'mirror'):
+                self.level_screen.target_layout.remove_widget(child)

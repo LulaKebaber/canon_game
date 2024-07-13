@@ -1,8 +1,8 @@
 import json
-import os
+
 
 class LevelParser:
-    def __init__(self, level):
+    def __init__(self, level=None):
         self.level = level
         self.data = self._load_data()
 

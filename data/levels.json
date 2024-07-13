@@ -14,6 +14,16 @@
       "target_positions": [[700, 300], [700, 350], [500, 500], [300, 200], [700, 500]],
       "obstacle_positions": [[400, 300], [600, 300], [500, 200], [500, 400]],
       "mirror_positions": [[400, 50]]
+    },
+    "level2": {
+      "target_positions": [[700, 300], [700, 350]],
+      "obstacle_positions": [[400, 300], [600, 300], [200, 300]],
+      "mirror_positions": [[300, 50]]
+    },
+    "level3": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
     }
   }
 }

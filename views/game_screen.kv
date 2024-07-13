@@ -45,17 +45,96 @@
             on_release: root.start_new_game()
 
         Button:
-            text: 'Load'
-            size_hint: (None, None)
-            size: (200, 50)
-            on_release: app.root.controller.load_game()
-
-        Button:
             text: 'Select Level'
             size_hint: (None, None)
             size: (200, 50)
-            on_release: app.root.controller.select_level()
+            on_release: root.select_level()
 
+# select_level.kv
+<SelectLevelScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: "Select a Level"
+            font_size: 32
+            size_hint_y: None
+            height: 100
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            GridLayout:
+                cols: 2
+                spacing: 15
+                size_hint: None, 1
+                size: self.minimum_size
+                pos_hint: {'center_x': 0.5}
+
+                Button:
+                    text: "Level 1"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 2"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 3"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 4"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 5"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 6"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 7"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 8"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 9"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+
+                Button:
+                    text: "Level 10"
+                    size_hint: None, None
+                    size: 120, 50
+                    on_release: root.on_button_release(self)
+            
 
 <WeaponSelectionScreen>:
     BoxLayout:
