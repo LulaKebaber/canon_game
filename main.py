@@ -6,6 +6,7 @@ from views.game_screen import GameScreen
 from views.end_game_screen import EndGameScreen
 from views.ranking_screen import RankingScreen
 from views.weapon_selection_screen import WeaponSelectionScreen
+from views.help_screen import HelpScreen
 from controllers.game_controller import GameController
 from controllers.ranking_controller import RankingController
 from views.levels.level1 import Level1
@@ -17,7 +18,7 @@ from kivy.lang import Builder
 Config.set('graphics', 'width', SCREEN_WIDTH)
 Config.set('graphics', 'height', SCREEN_HEIGHT)
 Builder.load_file('views/game_screen.kv')
-Builder.load_file('views/levels/level1.kv')
+Builder.load_file('views/levels/levels.kv')
 
 class GameApp(App):
     def build(self):
@@ -29,7 +30,7 @@ class GameApp(App):
         ranking_controller = RankingController(screen_manager=screen_manager)
 
         # Добавление экрана главного меню и передача контроллера
-        main_menu = MainMenu(name='main_menu')
+        main_menu = MainMenu(name='main_menu_screen')
         main_menu.controller = game_controller
         screen_manager.add_widget(main_menu)
 
@@ -54,8 +55,11 @@ class GameApp(App):
         ranking_screen = RankingScreen(name='ranking_screen', controller=ranking_controller)
         screen_manager.add_widget(ranking_screen)
 
+        help_screen = HelpScreen(name='help_screen')
+        screen_manager.add_widget(help_screen)
+
         # Устанавливаем главный экран как текущий
-        screen_manager.current = 'main_menu'
+        screen_manager.current = 'main_menu_screen'
 
         return screen_manager
 

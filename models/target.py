@@ -2,13 +2,19 @@ from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
 
 class TargetWidget(Widget):
-    def __init__(self, targets, **kwargs):
+    def __init__(self, target_info, pos, **kwargs):
         super().__init__(**kwargs)
         self.widget_name = "target"
-        self.targets = targets
+        self.target_info = target_info
         self.size_hint = (None, None)
-        self.size = targets["size"]
+        self.size = target_info.get("size", [70, 70])
+        self.color = target_info.get("color", [1, 1, 1, 1])
+        self.pos = pos
 
+        self.update_graphics()
+
+    def update_graphics(self):
         with self.canvas.before:
-            Color(self.targets["color"])
-            Rectangle(pos=self.pos, size=self.size)
+            Color(*self.color)
+            self.rect = Rectangle(pos=self.pos, size=self.size)
+    

@@ -1,18 +1,19 @@
 {
-  "targets": {
+  "targets_properties": {
     "name": "default_target",
     "color": [1, 1, 1, 1],
     "size": [70, 70]
   },
+  "obstacles_properties": {
+      "name": "default_obstacle",
+      "color": [0, 0, 1, 1],
+      "size": [50, 50]
+  },
   "levels": {
     "level1": {
-      "positions": [[700, 300], [500, 400], [300, 200], [700, 500]]
-    }
-  },
-  "obstacles": {
-    "default_obstacle": {
-      "color": [0.5, 0.5, 0.5, 1],
-      "size": [50, 50]
+      "target_positions": [[700, 300], [700, 350], [500, 500], [300, 200], [700, 500]],
+      "obstacle_positions": [[400, 300], [600, 300], [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50]]
     }
   }
 }

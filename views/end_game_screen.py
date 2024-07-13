@@ -11,5 +11,5 @@ class EndGameScreen(Screen):
     def on_restart_game(self):
         self.controller.screen_manager.current = "level1"
 
-    def on_main_menu(self):
-        self.controller.screen_manager.current = "main_menu"
+    def back_to_menu(self):
+        self.controller.screen_manager.current = "main_menu_screen"

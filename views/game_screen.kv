@@ -5,7 +5,6 @@
 <Label>:
     font_size: 20
 
-
 <MainMenu>:
     BoxLayout:
         orientation: 'vertical'
@@ -29,7 +28,7 @@
             text: 'Help'
             size_hint: (None, None)
             size: (200, 50)
-            on_release: app.root.controller.show_help()
+            on_release: root.show_help()
     
 
 <GameScreen>:
@@ -185,7 +184,7 @@
                 height: 50
                 width: 200
                 pos_hint: {'center_x': 0.5}
-                on_press: app.root.current = 'main_menu'
+                on_press: root.back_to_menu()
 
 
 <EndGameScreen>:
@@ -210,4 +209,24 @@
             size_hint: (None, None)
             size: (200, 50)
             pos_hint: {'center_x': 0.5}
-            on_release: root.on_main_menu()
+            on_release: root.back_to_menu()
+
+<HelpScreen>:
+    FloatLayout:
+        Label:
+            text: "Welcome to the game! Here is how you can play:\n\n1. Use the buttons on the top left to select different weapons.\n2. Aim and shoot the targets to score points.\n3. The game ends when all targets are destroyed.\n4. Use bullets, lasers, and bombshells strategically to achieve the highest score!\n\nEnjoy the game!"
+            size_hint: 0.8, 0.6
+            pos_hint: {'x': 0.1, 'y': 0.3}
+        
+        Button:
+            text: 'Back to Menu'
+            size_hint: 0.2, 0.1
+            pos_hint: {'x': 0.4, 'y': 0.1}
+            on_press: root.back_to_menu()
+        
+        Button:
+            text: 'GitHub'
+            size_hint: None, None
+            size: 100, 50
+            pos_hint: {'x': 0.85, 'y': 0.1}
+            on_press: root.open_github()

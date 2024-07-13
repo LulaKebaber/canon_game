@@ -13,3 +13,6 @@ class RankingScreen(Screen):
 
     def on_enter(self):
         self.controller.get_records()
+
+    def back_to_menu(self):
+        self.manager.current = 'main_menu_screen'

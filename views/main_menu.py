@@ -9,3 +9,6 @@ class MainMenu(Screen):
 
     def show_ranking(self):
         self.manager.current = 'ranking_screen'
+
+    def show_help(self):
+        self.manager.current = 'help_screen'

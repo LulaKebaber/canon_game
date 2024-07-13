@@ -104,6 +104,8 @@ class GameController:
                             reset_method()
                         self.check_targets_left()
                         break
+                    elif target.widget_name == "obstacle" and weapon.widget_name != "laser":
+                        reset_method()
                     elif target.widget_name == "mirror" and weapon.widget_name == "laser":
                         weapon.velocity_y *= -1
                         break
@@ -115,9 +117,7 @@ class GameController:
         self.on_collision(self.laser, self.laser.reset_laser)
 
     def on_collision_bombshell(self):
-        def bombshell_reset():
-            self.bombshell.animate_explosion()
-        self.on_collision(self.bombshell, bombshell_reset)
+        self.on_collision(self.bombshell, self.bombshell.reset_bombshell)
 
     def check_targets_left(self):
         targets_left = any(
