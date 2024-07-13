@@ -5,8 +5,10 @@ class LevelParser:
     def __init__(self, level=None):
         self.level = level
         self.data = self._load_data()
-
+    
     def _load_data(self):
+        """Load the JSON data from the file data/levels.json.
+           Contains the all information about positions on the level."""
         try:
             with open("data/levels.json") as file:
                 return json.load(file)
@@ -16,6 +18,8 @@ class LevelParser:
             raise ValueError("File data/levels.json contains invalid JSON.")
     
     def parse_level_info(self):
+        """Parse the selected level information from the JSON data.
+           Returns a dictionary with the level information."""
         try:
             levels = self.data["levels"]
             return levels.get(self.level, {})
@@ -23,12 +27,15 @@ class LevelParser:
             raise KeyError("The key 'levels' was not found in the JSON data.")
         
     def parse_obstacle_properties(self):
+        """Parse and returns the obstacles properties from the data."""
         return self.data["obstacles_properties"]
     
     def parse_targets_properties(self):
+        """Parse and returns the targets properties from the data."""
         return self.data["targets_properties"]
     
     def save_score(self, score, bullets_spent):
+        """Save the score and bullets spent in the data/records.json file."""
         with open("data/records.json", "r") as file:
             records = json.load(file)
             records["records"][str(len(records["records"]) + 1)] = {
@@ -40,6 +47,9 @@ class LevelParser:
             json.dump(records, file)
     
     def sort_records(self):
+        """Sort the records in the data/records.json file by score and bullets spent.
+           The records are sorted in descending order by score and ascending order by bullets spent.
+           The sorted records are saved back to the file."""
         try:
             with open("data/records.json") as file:
                 records_data = json.load(file)

@@ -3,6 +3,7 @@ from kivy.graphics import Color, Rectangle
 
 class ObstacleWidget(Widget):
     def __init__(self, obstacle_info, pos, **kwargs):
+        """Initializes the obstacle widget properties."""
         super().__init__(**kwargs)
         self.widget_name = "obstacle"
         self.obstacle_info = obstacle_info
@@ -14,6 +15,7 @@ class ObstacleWidget(Widget):
         self.update_graphics()
 
     def update_graphics(self):
+        """Updates the graphics of the obstacle widget."""
         with self.canvas.before:
             Color(*self.color)
             self.rect = Rectangle(pos=self.pos, size=self.size)

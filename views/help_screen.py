@@ -10,8 +10,10 @@ class HelpScreen(Screen):
         super().__init__(**kwargs)
         
     def back_to_menu(self):
+        """Changes the screen to the main menu screen."""
         self.manager.current = 'main_menu_screen'
-        
-    def open_github(self):
-        webbrowser.open('https://github.com/TamirlanKairbek/cannongamedemo')
+    
+    def open_github_repo(self):
+        """Opens the GitHub repository in the web browser."""
+        webbrowser.open('https://github.com/LulaKebaber/cannongamedemo')
 
