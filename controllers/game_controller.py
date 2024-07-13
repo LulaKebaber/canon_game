@@ -35,15 +35,9 @@ class GameController:
         self.clear_canvas()
 
     def save_score(self, score):
-        with open("data/records.json", "r") as file:
-            records = json.load(file)
-            records["records"][str(len(records["records"]) + 1)] = {
-                "id": len(records["records"]) + 1,
-                "score": score,
-                "bullets_spent": [int(i) for i in list(self.get_weapon_bullets_spent().values())]
-            }
-        with open("data/records.json", "w") as file:
-            json.dump(records, file)
+        bullets_spent = [int(i) for i in list(self.get_weapon_bullets_spent().values())]
+        self.level_screen.parser.save_score(score, bullets_spent)
+        self.level_screen.parser.sort_records()
 
     def get_weapon_quantities(self):
         return self.weapon_quantities
@@ -108,7 +102,7 @@ class GameController:
                     if target.widget_name == "target":
                         self.level_screen.target_layout.remove_widget(target)
         return collided_widgets_names
-
+    
     def check_targets_left(self):
         targets_left = any(
             hasattr(child, 'widget_name') and child.widget_name == 'target'

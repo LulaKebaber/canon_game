@@ -24,6 +24,41 @@
       "target_positions": [[300, 200], [700, 500]],
       "obstacle_positions": [ [500, 200], [500, 400]],
       "mirror_positions": [[400, 50], [400, 600]]
+    },
+    "level4": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
+    },
+    "level5": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
+    },
+    "level6": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
+    },
+    "level7": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
+    },
+    "level8": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
+    },
+    "level9": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
+    },
+    "level10": {
+      "target_positions": [[300, 200], [700, 500]],
+      "obstacle_positions": [ [500, 200], [500, 400]],
+      "mirror_positions": [[400, 50], [400, 600]]
     }
   }
 }

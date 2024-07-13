@@ -78,4 +78,5 @@ class Bullet(Widget):
         self.acceleration = 0
         self.is_launched = False
         self.parent.controller.check_targets_left()
+        self.parent.controller.check_bullets()
 

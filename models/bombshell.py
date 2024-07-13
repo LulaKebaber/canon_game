@@ -95,5 +95,6 @@ class BombShell(Widget):
         self.is_launched = False
         self.is_exploded = False
         self.parent.controller.check_targets_left()
+        self.parent.controller.check_bullets()
 
 
