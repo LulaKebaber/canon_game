@@ -1,4 +1,4 @@
-# views/levels/level1.py
+# views/levels/level.py
 from kivy.uix.screenmanager import Screen
 from models.target import TargetWidget
 from models.obstacle import ObstacleWidget
@@ -6,16 +6,12 @@ from models.mirror import MirrorWidget
 from controllers.level_parser import LevelParser
 from kivy.config import Config
 
-Config.set('graphics', 'resizable', False)
-Config.set('graphics', 'width', '1000')
-Config.set('graphics', 'height', '700')
 
-
-class Level1(Screen):
+class Level(Screen):
     parser = LevelParser("level1")
 
-    def __init__(self, controller, **kw):
-        super().__init__(**kw)
+    def __init__(self, controller=None, **kwargs):
+        super().__init__(**kwargs)
         self.weapon_quantities = None
         self.controller = controller
         self.controller.set_level_screen(self)
