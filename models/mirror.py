@@ -1,7 +1,6 @@
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, Rectangle
 from kivy.uix.image import Image
-
+from kivy.graphics import Rectangle, Color
 
 class MirrorWidget(Widget):
     def __init__(self, pos, **kwargs):
@@ -10,5 +9,9 @@ class MirrorWidget(Widget):
         self.size_hint = (None, None)
         self.pos = pos
         
-        self.image = Image(source='assets/mirror.png', size=self.size, pos=self.pos)
-        self.add_widget(self.image)
+        self.image = Image(source='assets/mirror.png')
+        self.size = self.image.texture_size
+
+        with self.canvas:
+            Color(1, 1, 1, 1)
+            Rectangle(texture=self.image.texture, pos=self.pos, size=self.size)

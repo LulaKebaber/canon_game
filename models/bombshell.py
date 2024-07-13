@@ -35,16 +35,17 @@ class BombShell(Widget):
         self.ellipse.size = self.size
 
     def move(self, dt):
-        self.velocity_y -= self.acceleration
-        self.pos = Vector(*self.velocity) + self.pos
+        if self.controller.weapon_quantities['bombshells'] > 0:
+            self.velocity_y -= self.acceleration
+            self.pos = Vector(*self.velocity) + self.pos
 
-        if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0:
-            self.reset_bombshell()
-        if self.parent:
-            self.collided_widgets_names = self.parent.controller.on_collision_bombshell()
-            self.handle_collision()
-        if self.is_exploded:
-            self.explode()
+            if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0:
+                self.reset_bombshell()
+            if self.parent:
+                self.collided_widgets_names = self.parent.controller.on_collision(self)
+                self.handle_collision()
+            if self.is_exploded:
+                self.explode()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
@@ -56,7 +57,7 @@ class BombShell(Widget):
             self.end_pos = touch.pos
 
     def on_touch_up(self, touch):
-        if self.is_dragging:
+        if self.is_dragging and self.controller.weapon_quantities['bombshells'] > 0:
             self.is_dragging = False
             self.controller.weapon_quantities['bombshells'] -= 1
             self.move_ball()

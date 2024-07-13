@@ -61,6 +61,10 @@ class GameController:
 
         bombshells_label = self.level_screen.ids.bombshells_label
         bombshells_label.text = f"Bombshells: {int(self.weapon_quantities['bombshells'])}"
+    
+    def check_bullets(self):
+        if self.weapon_quantities['bullets'] < 1 and self.weapon_quantities['lasers'] < 1 and self.weapon_quantities['bombshells'] < 1:
+            self.end_game()
 
     def update_score_label(self):
         score_label = self.level_screen.ids.score_label
@@ -103,15 +107,6 @@ class GameController:
                     self.update_score_label()
                     self.check_targets_left()
         return collided_widgets_names
-
-    def on_collision_bullet(self):
-        return self.on_collision(self.ball)
-
-    def on_collision_laser(self):
-        return self.on_collision(self.laser)
-
-    def on_collision_bombshell(self):
-        return self.on_collision(self.bombshell)
 
     def check_targets_left(self):
         targets_left = any(

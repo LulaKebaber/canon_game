@@ -35,18 +35,19 @@ class Laser(Widget):
         self.ellipse.size = self.size
 
     def move(self, dt):
-        self.pos = Vector(*self.velocity) + self.pos
+        if self.controller.weapon_quantities['lasers'] > 0:
+            self.pos = Vector(*self.velocity) + self.pos
 
-        if self.is_launched:
-            self.path_points.extend([self.center_x, self.center_y])
-            self.line.points = self.path_points
+            if self.is_launched:
+                self.path_points.extend([self.center_x, self.center_y])
+                self.line.points = self.path_points
 
-        if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0:
-            self.reset_laser()
+            if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0:
+                self.reset_laser()
 
-        if self.parent:
-            self.collided_widgets = self.parent.controller.on_collision_laser()
-            self.handle_collision()
+            if self.parent:
+                self.collided_widgets = self.parent.controller.on_collision(self)
+                self.handle_collision()
         
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
@@ -58,7 +59,7 @@ class Laser(Widget):
             self.end_pos = touch.pos
 
     def on_touch_up(self, touch):
-        if self.is_dragging:
+        if self.is_dragging and self.controller.weapon_quantities['lasers'] > 0:
             self.is_dragging = False
             self.end_pos = touch.pos
             self.controller.weapon_quantities['lasers'] -= 1

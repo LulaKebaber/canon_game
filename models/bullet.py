@@ -22,7 +22,7 @@ class Bullet(Widget):
         self.size = BULLET_SIZE
         self.pos = INITIAL_POS
         self.acceleration = 0
-
+        
         with self.canvas:
             Color(*BULLET_COLOR)
             self.ellipse = Ellipse(pos=self.pos, size=self.size)
@@ -34,14 +34,15 @@ class Bullet(Widget):
         self.ellipse.size = self.size
 
     def move(self, dt):
-        self.velocity_y -= self.acceleration
-        self.pos = Vector(*self.velocity) + self.pos
+        if self.controller.weapon_quantities['bullets'] > 0:
+            self.velocity_y -= self.acceleration
+            self.pos = Vector(*self.velocity) + self.pos
 
-        if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
-            self.reset_bullet()
-        if self.parent:
-            self.collided_widgets = self.parent.controller.on_collision_bullet()
-            self.handle_collision()
+            if self.y > SCREEN_HEIGHT or self.y < 0 or self.x > SCREEN_WIDTH or self.x < 0 or self.velocity_x == 0 and self.velocity_y == 0:
+                self.reset_bullet()
+            if self.parent:
+                self.collided_widgets = self.parent.controller.on_collision(self)
+                self.handle_collision()
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos) and not self.is_launched:
@@ -49,12 +50,12 @@ class Bullet(Widget):
             self.is_dragging = True
 
     def on_touch_up(self, touch):
-        if self.is_dragging:
+        if self.is_dragging and self.controller.weapon_quantities['bullets'] > 0:
             self.end_pos = touch.pos
             self.is_dragging = False
             self.controller.weapon_quantities['bullets'] -= 1
-            self.move_ball()
             self.parent.controller.update_bullets_label()
+            self.move_ball()
 
     def move_ball(self):
         direction = Vector(*self.start_pos) - Vector(*self.end_pos)
