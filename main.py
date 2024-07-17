@@ -24,6 +24,8 @@ Builder.load_file('views/levels/levels.kv')
 
 class GameApp(App):
     def build(self):
+        """Main method to build the app. There inititalized all screens and controllers.
+           They are aded to the screen manager for navigation purposes."""
         screen_manager = ScreenManager()
 
         game_controller = GameController(screen_manager=screen_manager)
@@ -61,5 +63,6 @@ class GameApp(App):
         return screen_manager
 
 
+"""Entry point of the app"""
 if __name__ == '__main__':
     GameApp().run()
