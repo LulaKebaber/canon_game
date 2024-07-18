@@ -2,7 +2,7 @@
 # The size of the field of the game, in pixels.
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 700
-GRAVITY = 0.2
+GRAVITY = 0.25
 
 # The frame rate of the game, in frame/s.
 FPS = 60
